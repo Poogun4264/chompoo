@@ -11,5 +11,5 @@ if ($result->num_rows > 0) {
     }
 }
 
-echo json_encode($data);
+echo json_encode($data[0]);
 ?>
