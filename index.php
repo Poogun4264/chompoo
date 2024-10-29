@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +25,18 @@
     </div>
 
     <div class="row gutters-sm">
-
       <!-- Card 1 -->
       <div class="col-md-8">
+      <?php if (isset($_SESSION['error'])) { ?>
+      <div class="alert alert-danger" role="alert">
+        <?php echo $_SESSION['error'];?>
+      </div>
+      <?php } ?>
+      <?php if (isset($_SESSION['flash_message'])) { ?>
+      <div class="alert alert-success" role="alert">
+          <?php echo $_SESSION['flash_message'];?>
+      </div>
+      <?php } ?>
         <div class="card mb-3">
           <div class="card-body">
             <div class="row">

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db.php';
 
 $id = $_POST['id'];
@@ -10,8 +11,11 @@ $address = $_POST['address'];
 $sql = "UPDATE tb_chompoo SET full_name='$full_name', email='$email', phone='$phone', address='$address' WHERE id=$id";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
+    $_SESSION['flash_message'] = "Record updated successfully";
 } else {
-    echo "Error updating record: " . $conn->error;
+    $_SESSION['error'] = "Error updating record: " . $conn->error;
 }
+$referrer = $_SERVER['HTTP_REFERER'];
+header("Location: $referrer");
+exit();
 ?>
