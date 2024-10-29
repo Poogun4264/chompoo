@@ -303,27 +303,6 @@ session_start();
         }
 
     });
-
-    $('#updateForm').submit(function(e) {
-      e.preventDefault();
-      $.ajax({
-        url: 'update.php',
-        type: 'POST',
-        data: $(this).serialize(),
-
-        success: function(response) {
-          // alert(response);
-          $('#editModal').modal('hide');
-          fetchData();
-        },
-
-        error: function() {
-          alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
-        }
-
-      });
-    });
-
     // Initial fetch
     fetchData();
   </script>
