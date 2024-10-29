@@ -221,19 +221,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="updateForm">
+          <form id="form" method="POST" action="update.php" class="row g-3 needs-validation" novalidate>
             <input type="hidden" id="modal_id" name="id" />
             <div class="mb-3">
               <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="modal_full_name" name="full_name">
+              <input type="text" class="form-control" id="modal_full_name" name="full_name" required>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="modal_email" name="email">
+              <input type="email" class="form-control" id="modal_email" name="email" required>
             </div>
             <div class="mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="modal_phone" name="phone">
+              <input type="text" class="form-control" id="modal_phone" name="phone" required>
             </div>
             <div class="mb-3">
               <label for="address" class="form-label">Address</label>
@@ -282,7 +282,15 @@
       });
     }
 
+    $('#saveChanges').click(function(e) {
+        var form = $('#form')[0];
+        if (form.checkValidity() === false) {
+            form.classList.add('was-validated')
+            form.reportValidity();
+            return false;
+        }
 
+    });
 
     $('#updateForm').submit(function(e) {
       e.preventDefault();
