@@ -29,12 +29,18 @@ session_start();
       <div class="col-md-8">
       <?php if (isset($_SESSION['error'])) { ?>
       <div class="alert alert-danger" role="alert">
-        <?php echo $_SESSION['error'];?>
+        <?php 
+          echo $_SESSION['error'];
+          unset($_SESSION['error']);
+          ?>
       </div>
       <?php } ?>
       <?php if (isset($_SESSION['flash_message'])) { ?>
       <div class="alert alert-success" role="alert">
-          <?php echo $_SESSION['flash_message'];?>
+          <?php 
+              echo $_SESSION['flash_message'];
+              unset($_SESSION['flash_message']);
+          ?>
       </div>
       <?php } ?>
         <div class="card mb-3">
@@ -303,6 +309,27 @@ session_start();
         }
 
     });
+
+    $('#updateForm').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: 'update.php',
+        type: 'POST',
+        data: $(this).serialize(),
+
+        success: function(response) {
+          // alert(response);
+          $('#editModal').modal('hide');
+          fetchData();
+        },
+
+        error: function() {
+          alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
+        }
+
+      });
+    });
+
     // Initial fetch
     fetchData();
   </script>
